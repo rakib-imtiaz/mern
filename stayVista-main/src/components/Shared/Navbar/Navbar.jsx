@@ -21,7 +21,6 @@ const Navbar = () => {
   };
   const modalHandler = async () => {
     console.log("I want to be a host");
-    // closeModal()
     try {
       const currentUser = {
         email: user?.email,
@@ -37,21 +36,20 @@ const Navbar = () => {
       }
     } catch (err) {
       console.log(err);
-      toast.error(err.message)
+      toast.error(err.message);
     } finally {
       closeModal();
     }
   };
 
   return (
-    <div className="fixed w-full bg-white z-10 shadow-sm">
+    <div className="fixed w-full bg-white z-10 shadow-md">
       <div className="py-4 border-b-[1px]">
         <Container>
-          <div className="flex flex-row  items-center justify-between gap-3 md:gap-0">
+          <div className="flex flex-row items-center justify-between gap-3 md:gap-0">
             {/* Logo */}
             <Link to="/">
               <img
-                // className='hidden md:block'
                 src="https://i.ibb.co/4ZXzmq5/logo.png"
                 alt="logo"
                 width="100"
@@ -63,15 +61,12 @@ const Navbar = () => {
               <div className="flex flex-row items-center gap-3">
                 {/* Become A Host btn */}
                 <div className="hidden md:block">
-                  {/* {!user && ( */}
                   <button
-                    // disabled={!user}
                     onClick={() => setIsModalOpen(true)}
-                    className="disabled:cursor-not-allowed cursor-pointer hover:bg-neutral-100 py-3 px-4 text-sm font-semibold rounded-full  transition"
+                    className="bg-rose-600 text-white px-4 py-2 rounded-full font-semibold hover:bg-rose-700 transition"
                   >
                     Host your home
                   </button>
-                  {/* )} */}
                 </div>
                 {/* Modal */}
                 <HostModal
@@ -86,7 +81,6 @@ const Navbar = () => {
                 >
                   <AiOutlineMenu />
                   <div className="hidden md:block">
-                    {/* Avatar */}
                     <img
                       className="rounded-full"
                       referrerPolicy="no-referrer"
@@ -112,8 +106,7 @@ const Navbar = () => {
                       <>
                         <Link
                           to="/dashboard"
-                          // md:hidden
-                          className="block  px-4 py-3 hover:bg-neutral-100 transition font-semibold"
+                          className="block px-4 py-3 hover:bg-neutral-100 transition font-semibold"
                         >
                           Dashboard
                         </Link>

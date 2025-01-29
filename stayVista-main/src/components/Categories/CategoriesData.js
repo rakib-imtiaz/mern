@@ -13,81 +13,52 @@ import { FaSkiing } from 'react-icons/fa'
 import { BsSnow } from 'react-icons/bs'
 import { IoDiamond } from 'react-icons/io5'
 import { MdOutlineVilla } from 'react-icons/md'
+import { FaUmbrellaBeach, FaMountain, FaLandmark, FaCity, FaHome, FaWater, FaTree, FaHotel, FaMoneyBill } from 'react-icons/fa'
 
 export const categories = [
   {
     label: 'Beach',
-    icon: TbBeach,
-    description: 'This property is close to the beach!',
+    icon: FaUmbrellaBeach,
+    description: 'Properties near beautiful beaches!',
   },
   {
-    label: 'Windmills',
-    icon: GiWindmill,
-    description: 'This property is has windmills!',
+    label: 'Hill Tracts',
+    icon: FaMountain,
+    description: 'Properties in scenic hill areas!',
   },
   {
-    label: 'Modern',
-    icon: MdOutlineVilla,
-    description: 'This property is modern!',
+    label: 'Historical',
+    icon: FaLandmark,
+    description: 'Properties near historical sites!',
   },
   {
-    label: 'Countryside',
-    icon: TbMountain,
-    description: 'This property is in the countryside!',
+    label: 'City',
+    icon: FaCity,
+    description: 'Urban properties in major cities!',
   },
   {
-    label: 'Pools',
-    icon: TbPool,
-    description: 'This is property has a beautiful pool!',
+    label: 'Rural',
+    icon: FaHome,
+    description: 'Experience authentic village life!',
   },
   {
-    label: 'Islands',
-    icon: GiIsland,
-    description: 'This property is on an island!',
+    label: 'River',
+    icon: FaWater,
+    description: 'Properties with riverside views!',
   },
   {
-    label: 'Lake',
-    icon: GiBoatFishing,
-    description: 'This property is near a lake!',
+    label: 'Forest',
+    icon: FaTree,
+    description: 'Properties surrounded by nature!',
   },
   {
-    label: 'Skiing',
-    icon: FaSkiing,
-    description: 'This property has skiing activities!',
+    label: 'Luxury',
+    icon: FaHotel,
+    description: 'Premium luxury accommodations!',
   },
   {
-    label: 'Castles',
-    icon: GiCastle,
-    description: 'This property is an ancient castle!',
-  },
-  {
-    label: 'Caves',
-    icon: GiCaveEntrance,
-    description: 'This property is in a spooky cave!',
-  },
-  {
-    label: 'Camping',
-    icon: GiForestCamp,
-    description: 'This property offers camping activities!',
-  },
-  {
-    label: 'Arctic',
-    icon: BsSnow,
-    description: 'This property is in arctic environment!',
-  },
-  {
-    label: 'Desert',
-    icon: GiCactus,
-    description: 'This property is in the desert!',
-  },
-  {
-    label: 'Barns',
-    icon: GiBarn,
-    description: 'This property is in a barn!',
-  },
-  {
-    label: 'Lux',
-    icon: IoDiamond,
-    description: 'This property is brand new and luxurious!',
+    label: 'Budget',
+    icon: FaMoneyBill,
+    description: 'Affordable comfortable stays!',
   },
 ]
