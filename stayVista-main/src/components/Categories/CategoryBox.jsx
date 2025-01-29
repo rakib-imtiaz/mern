@@ -1,64 +1,58 @@
 import PropTypes from 'prop-types'
-import { useNavigate, useSearchParams } from 'react-router-dom'
-import qs from 'query-string'
+import queryString from 'query-string';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
-const CategoryBox = ({ label, icon: Icon, description }) => {
-  const [params, setParams] = useSearchParams()
+
+
+
+
+
+const CategoryBox = ({ label, icon: Icon }) => {
+  // eslint-disable-next-line no-unused-vars
+  const [params,setParams] = useSearchParams()
+  const category = params.get('category')
+  console.log();
+  
   const navigate = useNavigate()
-  const value = params.get('category')
 
   const handleClick = () => {
-    let currentQuery = {}
-    if (params) {
-      currentQuery = qs.parse(params.toString())
-    }
-    const updatedQuery = {
-      ...currentQuery,
-      category: label,
-    }
 
-    const url = qs.stringifyUrl(
-      {
-        url: '/',
-        query: updatedQuery,
-      },
-      { skipNull: true }
-    )
+    // 1. Create Query String
+    let currentQuery = {category : label}
+    const url = queryString.stringifyUrl({
+      url: '/',
+      query: currentQuery,
+    })
+    // url output ---> /?category=label("?category=label" this is not a route)
 
+    // 2. set query string in url 
     navigate(url)
   }
 
+
   return (
     <div
-      onClick={handleClick}
-      className={`flex flex-col items-center justify-center gap-2 p-4 border-2 rounded-xl hover:border-rose-500 transition cursor-pointer group 
-      ${value === label ? 'border-rose-500' : 'border-neutral-200'}
-      w-[200px] h-[180px]`}
+    onClick={handleClick}
+      className={`flex 
+  flex-col 
+  items-center 
+  justify-center 
+  gap-2
+  p-3
+  border-b-2
+  hover:text-neutral-800
+  transition
+  cursor-pointer ${category === label && "border-b-neutral-800 text-neutral-800"}`}
     >
-      <Icon
-        size={30}
-        className={`${value === label ? 'text-rose-500' : 'text-neutral-600'} 
-        group-hover:text-rose-500 transition`}
-      />
-      <div className="text-center">
-        <div
-          className={`text-lg font-semibold ${value === label ? 'text-rose-500' : 'text-gray-800'
-            } group-hover:text-rose-500 transition`}
-        >
-          {label}
-        </div>
-        <div className="text-sm text-gray-500 mt-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          {description}
-        </div>
-      </div>
+      <Icon size={26} />
+      <div className='text-sm font-medium'>{label}</div>
     </div>
   )
 }
 
 CategoryBox.propTypes = {
   label: PropTypes.string,
-  icon: PropTypes.func,
-  description: PropTypes.string,
+  icon: PropTypes.elementType,
 }
 
 export default CategoryBox
