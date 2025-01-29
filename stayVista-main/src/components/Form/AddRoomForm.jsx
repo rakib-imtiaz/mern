@@ -8,13 +8,14 @@ const AddRoomForm = ({
   dates,
   handleDates,
   handleSubmit,
-  // eslint-disable-next-line no-unused-vars
   setImagePreview,
   imagePreview,
   imageText,
   handleImage,
   loading,
   handleTourImage,
+  tourImagePreview,
+  tourImageText,
 }) => {
   return (
     <div className="w-full min-h-[calc(100vh-40px)] flex flex-col justify-center items-center text-gray-800 rounded-xl bg-gray-50">
@@ -82,31 +83,36 @@ const AddRoomForm = ({
               />
             </div>
 
-            <div className="p-4 bg-white w-full m-auto rounded-lg">
-              <div className="file_upload px-5 py-3 relative border-4 border-dotted border-gray-300 rounded-lg">
-                <div className="flex flex-col w-max mx-auto text-center">
-                  <label>
-                    <input
-                      className="text-sm cursor-pointer w-36 hidden"
-                      type="file"
-                      name="image"
-                      onChange={(e) => handleImage(e.target.files[0])}
-                      id="image"
-                      accept="image/*"
-                      hidden
-                    />
-                    <div className="bg-rose-500 text-white border border-gray-300 rounded font-semibold cursor-pointer p-1 px-3 hover:bg-rose-500">
-                      {imageText.length > 20
-                        ? imageText.split(".")[0].slice(0, 15) +
-                        "..." +
-                        imageText.split(".")[1]
-                        : imageText}
-                    </div>
-                  </label>
+            <div className="space-y-1">
+              <label className="block text-gray-600">Room Image</label>
+              <div className="p-4 bg-white w-full rounded-lg">
+                <div className="file_upload px-5 py-3 relative border-4 border-dotted border-gray-300 rounded-lg">
+                  <div className="flex flex-col w-max mx-auto text-center">
+                    <label>
+                      <input
+                        className="text-sm cursor-pointer w-36 hidden"
+                        type="file"
+                        name="image"
+                        onChange={(e) => handleImage(e.target.files[0])}
+                        id="image"
+                        accept="image/*"
+                        hidden
+                      />
+                      <div className="bg-rose-500 text-white border border-gray-300 rounded font-semibold cursor-pointer p-1 px-3 hover:bg-rose-600">
+                        {imageText}
+                      </div>
+                    </label>
+                  </div>
                 </div>
-              </div>
-              <div className="h-16 w-16 object-cover overflow-hidden flex items-center border border-gray-300 rounded">
-                {imagePreview && <img src={imagePreview} alt="Preview" />}
+                {imagePreview && (
+                  <div className="mt-2">
+                    <img
+                      src={imagePreview}
+                      alt="Room Preview"
+                      className="w-full h-32 object-cover rounded-lg"
+                    />
+                  </div>
+                )}
               </div>
             </div>
 
@@ -127,7 +133,7 @@ const AddRoomForm = ({
                         hidden
                       />
                       <div className="bg-blue-500 text-white border border-gray-300 rounded font-semibold cursor-pointer p-1 px-3 hover:bg-blue-600">
-                        Upload 360° Image
+                        {tourImageText}
                       </div>
                     </label>
                     <div className="text-gray-500 text-xs mt-2">
@@ -135,6 +141,15 @@ const AddRoomForm = ({
                     </div>
                   </div>
                 </div>
+                {tourImagePreview && (
+                  <div className="mt-2">
+                    <img
+                      src={tourImagePreview}
+                      alt="360° Tour Preview"
+                      className="w-full h-32 object-cover rounded-lg"
+                    />
+                  </div>
+                )}
               </div>
             </div>
 
@@ -238,6 +253,8 @@ AddRoomForm.propTypes = {
   handleImage: PropTypes.func,
   loading: PropTypes.bool,
   handleTourImage: PropTypes.func,
+  tourImagePreview: PropTypes.string,
+  tourImageText: PropTypes.string,
 };
 
 export default AddRoomForm;

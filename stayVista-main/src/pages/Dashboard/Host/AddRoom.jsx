@@ -2,7 +2,7 @@ import { useState } from "react";
 import AddRoomForm from "../../../components/Form/AddRoomForm";
 import useAuth from "../../../hooks/useAuth";
 import { imageUpload } from "../../../api/utils";
-import { Helmet} from "react-helmet-async";
+import { Helmet } from "react-helmet-async";
 import { useMutation } from '@tanstack/react-query'
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import toast from "react-hot-toast";
@@ -14,7 +14,9 @@ const AddRoom = () => {
   const [loading, setLoading] = useState(false)
   const { user } = useAuth();
   const [imagePreview, setImagePreview] = useState()
-    const [imageText,setImageText] = useState('Upload Image')
+  const [imageText, setImageText] = useState('Upload Image')
+  const [tourImagePreview, setTourImagePreview] = useState()
+  const [tourImageText, setTourImageText] = useState('Upload 360° Image')
 
   const [dates, setDates] = useState({
     startDate: new Date(),
@@ -30,13 +32,13 @@ const AddRoom = () => {
     setDates(item.selection);
   };
 
-  const {mutateAsync} = useMutation({
+  const { mutateAsync } = useMutation({
 
-    mutationFn: async(roomData) =>{
-      const {data} = await axiosSecure.post(`/room`, roomData)
+    mutationFn: async (roomData) => {
+      const { data } = await axiosSecure.post(`/room`, roomData)
       return data
     },
-    onSuccess: () =>{
+    onSuccess: () => {
       console.log('Data Saved successfully');
       toast.success('Room Added Successfully!')
       navigate('/dashboard/my-listings')
@@ -68,6 +70,7 @@ const AddRoom = () => {
     const description = form.description.value;
     const bedrooms = form.bedrooms.value;
     const image = form.image.files[0];
+    const tourImage = form.tourImage?.files[0];
     const host = {
       name: user?.displayName,
       image: user?.photoURL,
@@ -76,6 +79,11 @@ const AddRoom = () => {
 
     try {
       const image_url = await imageUpload(image);
+      let tour_image_url = null;
+      if (tourImage) {
+        tour_image_url = await imageUpload(tourImage);
+      }
+
       const roomData = {
         location,
         category,
@@ -89,6 +97,7 @@ const AddRoom = () => {
         description,
         host,
         image: image_url,
+        tourImage: tour_image_url,
       };
       console.table(roomData);
 
@@ -103,25 +112,30 @@ const AddRoom = () => {
     }
   };
 
-   /**---------------------------------
- *       handle image Chaange                *
- ----------------------------------*/
+  /**---------------------------------
+*       handle image Chaange                *
+----------------------------------*/
 
- const handleImage = image => {
+  const handleImage = image => {
     setImagePreview(URL.createObjectURL(image));
     setImageText(image.name)
- }
+  }
 
- 
+  const handleTourImage = image => {
+    setTourImagePreview(URL.createObjectURL(image));
+    setTourImageText(image.name)
+  }
+
+
 
   return (
-   
-     <>
-     <Helmet>
-      <title>Add Room | Dashboard</title>
-     </Helmet>
 
-     {/* Form  */}
+    <>
+      <Helmet>
+        <title>Add Room | Dashboard</title>
+      </Helmet>
+
+      {/* Form  */}
       <AddRoomForm
         dates={dates}
         handleDates={handleDates}
@@ -131,9 +145,12 @@ const AddRoom = () => {
         handleImage={handleImage}
         imageText={imageText}
         loading={loading}
+        handleTourImage={handleTourImage}
+        tourImagePreview={tourImagePreview}
+        tourImageText={tourImageText}
       />
-     </>
-    
+    </>
+
   );
 };
 
